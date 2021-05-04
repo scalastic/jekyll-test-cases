@@ -67,12 +67,13 @@ do
   if [[ ${STATUS} == 0 ]]; then
     printf "\n===================================\n"
     echo "Project ${PROJECT} build: SUCCESS ✅"
-    echo "Take a look at files' size in ${PWD}/build/${PROJECT}/generated/assets/ing/"
+    echo "Generated site in: ./build/${PROJECT}/"
     printf "===================================\n\n"
   else
     printf "\n===================================\n"
     printf '%s\n' "$RESULT"
     echo "Project ${PROJECT} build: FAILED ❌"
+    echo "Generated site in: ./build/${PROJECT}/"
     printf "===================================\n\n"
   fi
 
