@@ -29,7 +29,7 @@ RUN magick -version
 
 
 # Update bundler to same as local dev
-RUN gem install bundler:2.2.15
+RUN gem install bundler:2.2.16
 
 # debug
 RUN bundle version

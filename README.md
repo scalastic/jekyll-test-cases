@@ -8,8 +8,8 @@ To deal with lossless compression image formats like WebP and Avif, I decided to
 
 But that's when I got into trouble...
 
-Locally, on my mac, everything was working great: I must say I run the usual `bundle exec jekyll serve` command to build my site.
-On the other hand, when I tried the Jekyll Actions solution, I encountered a very odd error: 
+- Locally, on my mac, everything was working great: I must say I run the usual `bundle exec jekyll serve` command to build my site.
+- On the other hand, when I tried the Jekyll Actions solution, I encountered a very odd error: 
 ```Liquid Exception: stack level too deep (SystemStackError)``` 
 
 So I decided to implement locally the way GitHub is actually building the Jekyll site. It's Docker after all! And, well, I ran into the same error.
@@ -47,15 +47,15 @@ That will build a local `jekyll-test-actions` docker image.
 ### Running the tests
 
 To see where the problem lies, I made 3 examples of Jekyll sites:
-1. **jekyll-basic**: containing usual <img> balise with original picture format PNG.
-1. **jekyll-jpt-webp**: converting the PNG picture into WebP format.
-1. **jekyll-jpt-avif**: converting the PNG picture into WebP and Avif formats.
+1. **jekyll-basic**: basic Jekyll site containing usual `<img>` balise with original picture format PNG.
+1. **jekyll-jpt-webp**: Jekyll site with `jekyll_picture_tag` plugin converting the PNG picture into WebP format.
+1. **jekyll-jpt-avif**: Jekyll site with `jekyll_picture_tag` plugin converting the PNG picture into WebP and Avif formats.
 
-The `test.sh` script simply run the build of this 3 projects inside the docker image. 
+The `run-tests.sh` script simply run the build of this 3 projects inside the docker image. 
 
 To do so, execute:
 ```
-./test.sh
+./run-tests.sh
 ```
 
 ### Results
@@ -111,9 +111,8 @@ Will not enlarge.
 Project jekyll-jpt-avif build: FAILED ❌
 ```
 
-### Questions
+### Question
 
 Where does the problem come from?
 
-Well, I don't know I will ask the mainteners of each project...
-
+Well, I don't know and I will ask the mainteners of `jekyll-action` and  `jekyll_picture_tag` projects!
