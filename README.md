@@ -63,7 +63,7 @@ To do so, execute:
 The test failed at step #3 when starting to convert image into Avif format:
 ```
 Warning: the running version of Bundler (2.1.4) is older than the version that created the lockfile (2.2.16). We suggest you to upgrade to the version that created the lockfile by running `gem install bundler:2.2.16`.
-Project jekyll-basic built: SUCCESS ✅
+Project jekyll-basic build: SUCCESS ✅
 Warning: the running version of Bundler (2.1.4) is older than the version that created the lockfile (2.2.16). We suggest you to upgrade to the version that created the lockfile by running `gem install bundler:2.2.16`.
 Jekyll Picture Tag Warning: /assets/img/logo.png
 is 640px wide (after cropping, if applicable),
@@ -83,7 +83,7 @@ is 640px wide (after cropping, if applicable),
 smaller than at least one size in the set [400, 600, 800, 1000].
 Will not enlarge.
 Jekyll Picture Tag Warning: /assets/img/logo.png is smaller than the requested fallback width of 800px. Using 640 px instead.
-Project jekyll-jpt-webp built: SUCCESS ✅
+Project jekyll-jpt-webp build: SUCCESS ✅
 Warning: the running version of Bundler (2.1.4) is older than the version that created the lockfile (2.2.16). We suggest you to upgrade to the version that created the lockfile by running `gem install bundler:2.2.16`.
 Jekyll Picture Tag Warning: /assets/img/logo.png
 is 640px wide (after cropping, if applicable),
@@ -108,7 +108,7 @@ Will not enlarge.
   from /usr/local/lib/ruby/gems/2.7.0/gems/bundler-2.1.4/libexec/bundle:34:in `<top (required)>'
   from /usr/local/bin/bundle:23:in `load'
   from /usr/local/bin/bundle:23:in `<main>'
-Project jekyll-jpt-avif built: FAILED ❌
+Project jekyll-jpt-avif build: FAILED ❌
 ```
 
 ### Questions

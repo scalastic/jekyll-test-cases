@@ -10,16 +10,16 @@ RUN apk add --no-cache git build-base
 RUN apk add --update tzdata
 # Use curl to send API requests
 RUN apk add --update curl
+
 # Install VIPS
-RUN apk add --update vips vips-tools
+# RUN apk add --update vips vips-tools
 # Update bundler to same as local dev
 # RUN gem install bundler:2.2.15
 
 # debug
 RUN bundle version
 RUN ruby --version
-RUN vips --version
-RUN ulimit -a
+# RUN vips list classes | grep -i foreignsave | grep "png\|avif\|webp"
 
 COPY LICENSE README.md /
 

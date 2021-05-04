@@ -1,6 +1,6 @@
 #!/bin/bash
 
-JEKYLL_PROJECTS=(jekyll-basic jekyll-jpt-webp jekyll-jpt-avif )
+JEKYLL_PROJECTS=(jekyll-basic jekyll-jpt-webp jekyll-jpt-avif)
 
 for PROJECT in "${JEKYLL_PROJECTS[@]}"
 do
@@ -15,7 +15,7 @@ do
   -e INPUT_TARGET_BRANCH='main' \
   -e INPUT_JEKYLL_BUILD_OPTIONS='--verbose' \
   -e INPUT_BUILD_ONLY=true \
-  -e INPUT_PRE_BUILD_COMMANDS='' \
+  -e INPUT_PRE_BUILD_COMMANDS='apk add --update vips vips-tools; gem install bundler:2.2.16; vips list classes | grep -i foreignsave | grep "png\|avif\|webp"' \
   -e INPUT_JEKYLL_ENV='production' \
   -e INPUT_JEKYLL_SRC="/${PROJECT}" \
   -e INPUT_GEM_SRC="/${PROJECT}" \
@@ -62,10 +62,18 @@ do
   jekyll-test-actions:latest
   )
 
-  if [ -f "${PWD}/build/${PROJECT}/index.html" ]; then
-    echo "Project ${PROJECT} built: SUCCESS ✅"
+  STATUS=$?
+
+  if [[ ${STATUS} == 0 ]]; then
+    printf "\n===================================\n"
+    echo "Project ${PROJECT} build: SUCCESS ✅"
+    echo "Take a look at files' size in ${PWD}/build/${PROJECT}/generated/assets/ing/"
+    printf "===================================\n\n"
   else
-    echo "Project ${PROJECT} built: FAILED ❌"
+    printf "\n===================================\n"
+    printf '%s\n' "$RESULT"
+    echo "Project ${PROJECT} build: FAILED ❌"
+    printf "===================================\n\n"
   fi
 
 done
