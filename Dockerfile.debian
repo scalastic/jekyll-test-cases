@@ -1,0 +1,44 @@
+FROM ruby:2-slim-buster
+
+LABEL version="2.0.1"
+LABEL repository="https://github.com/helaili/jekyll-action"
+LABEL homepage="https://github.com/helaili/jekyll-action"
+LABEL maintainer="Alain Hélaïli <helaili@github.com>"
+
+
+RUN set -eux; \
+  apt-get update; \
+  apt-get install -y --no-install-recommends \
+    git build-essential \
+    curl \
+    libvips-tools \
+    libvips42 \
+    ; \
+    rm -rf /var/lib/apt/lists/*
+
+# Build ImageMagick
+RUN curl -L -O https://www.imagemagick.org/download/ImageMagick.tar.gz; \
+  tar xvzf ImageMagick.tar.gz; \
+  cd $(find . -type d -name "ImageMagick-7*"); \
+  ./configure; \
+  make; \
+  make install; \
+  ldconfig /usr/local/lib
+
+RUN magick -version
+
+
+# Update bundler to same as local dev
+RUN gem install bundler:2.2.15
+
+# debug
+RUN bundle version
+RUN ruby --version
+RUN vips --version
+RUN ulimit -a
+
+COPY LICENSE README.md /
+
+COPY entrypoint.sh /
+
+ENTRYPOINT ["/entrypoint.sh"]
