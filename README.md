@@ -47,9 +47,9 @@ That will build a local `jekyll-test-actions` docker image.
 ### Running the tests
 
 To see where the problem lies, I made 3 examples of Jekyll sites:
-1. ***jekyll-basic*** containing usual <img> balise with original picture format PNG.
-1. ***jekyll-jpt-webp*** converting the PNG picture into WebP format.
-1. ***jekyll-jpt-avif*** converting the PNG picture into WebP and Avif formats.
+1. **jekyll-basic**: containing usual <img> balise with original picture format PNG.
+1. **jekyll-jpt-webp**: converting the PNG picture into WebP format.
+1. **jekyll-jpt-avif**: converting the PNG picture into WebP and Avif formats.
 
 The `test.sh` script simply run the build of this 3 projects inside the docker image. 
 
@@ -59,4 +59,61 @@ To do so, execute:
 ```
 
 ### Results
+
+The test failed at step #3 when starting to convert image into Avif format:
+```
+Warning: the running version of Bundler (2.1.4) is older than the version that created the lockfile (2.2.16). We suggest you to upgrade to the version that created the lockfile by running `gem install bundler:2.2.16`.
+Project jekyll-basic built: SUCCESS ✅
+Warning: the running version of Bundler (2.1.4) is older than the version that created the lockfile (2.2.16). We suggest you to upgrade to the version that created the lockfile by running `gem install bundler:2.2.16`.
+Jekyll Picture Tag Warning: /assets/img/logo.png
+is 640px wide (after cropping, if applicable),
+smaller than at least one size in the set [400, 600, 800, 1000].
+Will not enlarge.
+Jekyll Picture Tag Warning: /assets/img/logo.png
+is 640px wide (after cropping, if applicable),
+smaller than at least one size in the set [400, 600, 800, 1000].
+Will not enlarge.
+Jekyll Picture Tag Warning: /assets/img/logo.png is smaller than the requested fallback width of 800px. Using 640 px instead.
+Jekyll Picture Tag Warning: /assets/img/logo.png
+is 640px wide (after cropping, if applicable),
+smaller than at least one size in the set [400, 600, 800, 1000].
+Will not enlarge.
+Jekyll Picture Tag Warning: /assets/img/logo.png
+is 640px wide (after cropping, if applicable),
+smaller than at least one size in the set [400, 600, 800, 1000].
+Will not enlarge.
+Jekyll Picture Tag Warning: /assets/img/logo.png is smaller than the requested fallback width of 800px. Using 640 px instead.
+Project jekyll-jpt-webp built: SUCCESS ✅
+Warning: the running version of Bundler (2.1.4) is older than the version that created the lockfile (2.2.16). We suggest you to upgrade to the version that created the lockfile by running `gem install bundler:2.2.16`.
+Jekyll Picture Tag Warning: /assets/img/logo.png
+is 640px wide (after cropping, if applicable),
+smaller than at least one size in the set [400, 600, 800, 1000].
+Will not enlarge.
+  Liquid Exception: stack level too deep in /github/workspace/jekyll-jpt-avif/_layouts/default.html
+                    ------------------------------------------------
+      Jekyll 4.2.0   Please append `--trace` to the `build` command 
+                     for any additional information or backtrace. 
+                    ------------------------------------------------
+/github/workspace/jekyll-jpt-avif/vendor/bundle/ruby/2.7.0/gems/ruby-vips-2.0.17/lib/vips/operation.rb:187:in `vips_cache_operation_build': stack level too deep (SystemStackError)
+  from /github/workspace/jekyll-jpt-avif/vendor/bundle/ruby/2.7.0/gems/ruby-vips-2.0.17/lib/vips/operation.rb:187:in `build'
+  from /github/workspace/jekyll-jpt-avif/vendor/bundle/ruby/2.7.0/gems/ruby-vips-2.0.17/lib/vips/operation.rb:402:in `call'
+  from /github/workspace/jekyll-jpt-avif/vendor/bundle/ruby/2.7.0/gems/ruby-vips-2.0.17/lib/vips/image.rb:469:in `write_to_file'
+  from /github/workspace/jekyll-jpt-avif/vendor/bundle/ruby/2.7.0/gems/jekyll_picture_tag-2.0.3/lib/jekyll_picture_tag/images/image_file.rb:74:in `write'
+  from /github/workspace/jekyll-jpt-avif/vendor/bundle/ruby/2.7.0/gems/jekyll_picture_tag-2.0.3/lib/jekyll_picture_tag/images/image_file.rb:35:in `build'
+  from /github/workspace/jekyll-jpt-avif/vendor/bundle/ruby/2.7.0/gems/jekyll_picture_tag-2.0.3/lib/jekyll_picture_tag/images/image_file.rb:19:in `initialize'
+  from /github/workspace/jekyll-jpt-avif/vendor/bundle/ruby/2.7.0/gems/jekyll_picture_tag-2.0.3/lib/jekyll_picture_tag/images/generated_image.rb:81:in `new'
+  from /github/workspace/jekyll-jpt-avif/vendor/bundle/ruby/2.7.0/gems/jekyll_picture_tag-2.0.3/lib/jekyll_picture_tag/images/generated_image.rb:81:in `generate_image'
+   ... 71 levels...
+  from /usr/local/lib/ruby/2.7.0/bundler/friendly_errors.rb:123:in `with_friendly_errors'
+  from /usr/local/lib/ruby/gems/2.7.0/gems/bundler-2.1.4/libexec/bundle:34:in `<top (required)>'
+  from /usr/local/bin/bundle:23:in `load'
+  from /usr/local/bin/bundle:23:in `<main>'
+Project jekyll-jpt-avif built: FAILED ❌
+```
+
+### Questions
+
+Where does the problem come from?
+
+Well, I don't know I will ask the mainteners of each project...
 
